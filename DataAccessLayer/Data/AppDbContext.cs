@@ -1,11 +1,6 @@
 ﻿using DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Data
 {
@@ -32,6 +27,6 @@ namespace DataAccessLayer.Data
         {
             modelBuilder.Entity<UserInfo>().HasKey(userInfo => userInfo.Id);
         }
-        public DbSet<UserInfo> UsersInfos {  get; set; }
+        public DbSet<UserInfo> UserInfos {  get; set; }
     }
 }

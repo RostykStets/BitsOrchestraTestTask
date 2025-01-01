@@ -21,22 +21,22 @@ namespace DataAccessLayer.Repositories.Implementations
 
         public async Task DeleteUserInfo(int userInfoId)
         {
-            var userInfo = await _context.UsersInfos.FindAsync(userInfoId);
+            var userInfo = await _context.UserInfos.FindAsync(userInfoId);
             if (userInfo != null)
             {
-                _context.UsersInfos.Remove(userInfo);
+                _context.UserInfos.Remove(userInfo);
             }
             await Save();
         }
 
         public async Task<IEnumerable<UserInfo>> GetUserInfos()
         {
-            return await _context.UsersInfos.ToListAsync();
+            return await _context.UserInfos.ToListAsync();
         }
 
         public async Task InsertUserInfo(UserInfo userInfo)
         {
-            await _context.UsersInfos.AddAsync(userInfo);
+            await _context.UserInfos.AddAsync(userInfo);
             await Save();
         }
 
