@@ -8,4 +8,4 @@ After cloning this project, add your connection string to User Secrets of BitsOr
 }
 
 Then run choose DataAccessLyer as default project in Nu-Get Package console and run Update-Database command here.
-After that, run the wohle solution.
+After that, run the whole solution.
