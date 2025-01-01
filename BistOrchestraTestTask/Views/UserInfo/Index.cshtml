@@ -1,0 +1,137 @@
+﻿@model List<UserInfo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Manager</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        input[type="file"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        .edit-button {
+            background-color: #008CBA;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+
+        .edit-button:hover {
+            background-color: #007bb5;
+        }
+
+        .delete-button:hover {
+            background-color: #da190b;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSV Manager</h1>
+
+    @if (TempData["Error"] != null)
+    {
+        <p style="color: red;">@TempData["Error"]</p>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <p style="color: green;">@TempData["Success"]</p>
+    }
+
+    <table id="userInfoTable" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Married</th>
+                <th>Phone</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var userInfo in Model)
+            {
+                <tr>
+                    <td><input value="@userInfo.Name" /></td>
+                    <td><input type="date" value="@userInfo.DateOfBirth.ToString("yyyy-MM-dd")" /></td>
+                    <td><input type="checkbox" @(userInfo.Married ? "checked" : "") /></td>
+                    <td><input value="@userInfo.Phone" /></td>
+                    <td><input value="@userInfo.Salary" /></td>
+                    <td>
+                        <button class="edit-button" data-id="@userInfo.Id">Save</button>
+                        <button class="delete-button" data-id="@userInfo.Id">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
