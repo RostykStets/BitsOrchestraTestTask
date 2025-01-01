@@ -1,4 +1,8 @@
+using BusinessLogicLayer.Services.Implementations;
+using BusinessLogicLayer.Services.Interfaces;
 using DataAccessLayer.Data;
+using DataAccessLayer.Repositories.Implementations;
+using DataAccessLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add AppDbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"), x => x.MigrationsAssembly("DataAccessLayer"));
 });
+
+// Add interfaces and their implementations for DI
+builder.Services.AddScoped<IUserInfoRepository, UserInfoRepository>();
+builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
 var app = builder.Build();
 
@@ -30,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=UserInfo}/{action=Index}/{id?}");
 
 app.Run();
